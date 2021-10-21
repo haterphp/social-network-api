@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  application:
+    image: social-network
+    restart: always
+    environment:
+      - PORT=5000
+      - LOG_PATH=logs
+      - DB_PATH=mongodb://mongodb:27017/social-network
+      - ACCESS_TOKEN_SECRET=c9162a1fe47f6d340ee0b09d63d880a567024a575fb9d2aeeb5949e274b3ca9c
+    ports:
+      - 49160:5000
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:latest
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb:/data/db
+volumes:
+  mongodb:
